@@ -4,7 +4,9 @@ package com.avenueinfotech.locationsatellite;
 
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -381,4 +383,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            e.printStackTrace();
 //        }
 //    }
+
+
+    @Override
+    public void onBackPressed() {
+       final AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+       builder.setMessage("Do you want to Quit?");
+       builder.setCancelable(true);
+       builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialogInterface, int i) {
+               dialogInterface.cancel();
+           }
+       });
+       builder.setPositiveButton("Quit!", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               finish();
+           }
+       });
+       AlertDialog alertDialog = builder.create();
+       alertDialog.show();
+    }
 }
